@@ -6,7 +6,7 @@ $username = "s352j477";
 $password = "aiCeiph7";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysql_connect($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
@@ -14,5 +14,7 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";
 
+// Close connection
+mysql_close($link);
 
 ?> 
