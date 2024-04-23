@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:not(.active):hover {
+  background-color: gray;
+}
+
+.active {
+  background-color: #fb5592;
+}
+</style>
+
+
+
+<!---------------------- HTML -------------------------->
+
+
+<h1>Library Page</h1>
+
+
+<ul>
+  <li><a href="Homepage.html">Home</a></li>
+  <li class="active"><a href="employee.html">Employees</a></li>
+</ul>
+
+<p>Enter Employee credentials</p>
+
+
+<form action="db.php">
+  <input type="text" placeholder="Employee ID">
+	
+  <input type="submit" value="Enter">
+</form>
+
+</body>
+</html>

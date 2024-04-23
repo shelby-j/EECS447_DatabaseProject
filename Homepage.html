@@ -2,14 +2,80 @@
 <html>
 <body>
 
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: gray;
+}
+
+.active {
+  background-color: #fb5592;
+}
+</style>
+
+
+
+<!---------------------- HTML -------------------------->
+
+
 <h1>Library Page</h1>
+ 
 
-
-<p>Enter Employee credentials</p>
-
+<ul>
+  <li class="active"><a href="Homepage.html">Home</a></li>
+  <li><a href="employee.html">Employees</a></li>
+</ul>
+<br/>
 <form action="db.php">
-  <input type="submit" value="click on me!">
+	<label for="branches"> Pick a branch to search: </label>
+	<select id="branches">
+		<option value="Lawrence">Lawrence</option>
+		<option value="Olathe">Olathe</option>
+		<option value="Kansas City">Kansas City</option>
+		<option value="Gardner">Gardener</option>
+	</select>
+	<br/><br/>
+	
+	<label> Search by:  
+		<input type="radio" id="title" name="searchType" value="title"/>Title
+	</label>
+	<label>
+		<input type="radio" id="author" name="searchType" value="author"/>Author
+	</label>
+	<label>
+		<input type="radio" id="genre" name="searchType" value="genre"/>Genre
+	</label>
+	<br/>
+	<input type="text" placeholder="Search library database" size=40>
+    <input type="submit" value="Search">
+	
+	
 </form>
+
+<div class="results">
+
+</div>
+
+
 
 </body>
 </html>
