@@ -144,19 +144,19 @@ PRIMARY KEY (ISBN)
 --
 -- Dumping data for table 'BOOKINFO'
 --
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('60256672',1974,'Shel Silverstein', 'Where the Sidewalk Ends', '');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('152023984',1943,'Antoine de Saint-Exupery', 'The Little Prince');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('441013597',1965,'', 'Dune');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('345806786',1977,'Stephen King', 'The Shining');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('547928211',1954,'J.R.R. Tolkein', 'Lord of the Rings: Fellowship of the Ring');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('198826737',1832,'Jane Austen', 'Pride and Prejudice', '');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('1607105551',1811,'Jane Austen', 'Sense and Sensibility', '');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('0451524934',1949,'George Orwell', '1984','');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('345534832',1937,'J.R.R. Tolkein', 'The Hobbit');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('1903436915',1597,'William Shakespear', 'Romeo and Juilet', '');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('312367546',1962,'Madeleine L''Engle', 'A Wrinkle in Time');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('1451678193',1950,'Ray BradBury', 'The Martian Chronicles');
-INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('439023483',2008,'Susane Collins', 'The Hunger Games');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('60256672',1974,'Shel Silverstein', 'Where the Sidewalk Ends', 'wherethesidewalkends.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('152023984',1943,'Antoine de Saint-Exupery', 'The Little Prince', 'thelittleprince.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('441013597',1965,'Frank Herbert', 'Dune', 'dune.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('345806786',1977,'Stephen King', 'The Shining', 'theshining.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('547928211',1954,'J.R.R. Tolkein', 'Lord of the Rings: Fellowship of the Ring', 'lordoftherings.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('198826737',1832,'Jane Austen', 'Pride and Prejudice', 'prideandprejudice.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('1607105551',1811,'Jane Austen', 'Sense and Sensibility', 'senseandsensibility.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('0451524934',1949,'George Orwell', '1984','1984.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('345534832',1937,'J.R.R. Tolkein', 'The Hobbit', 'thehobbit.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('1903436915',1597,'William Shakespear', 'Romeo and Juilet', 'romeoandjuliet.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('312367546',1962,'Madeleine L''Engle', 'A Wrinkle in Time', 'wrinkleintime.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('1451678193',1950,'Ray BradBury', 'The Martian Chronicles', 'themartianchronicles.jpg');
+INSERT INTO BOOKINFO (ISBN, PUBYEAR, AUTHOR, TITLE, COVER) VALUES('439023483',2008,'Susane Collins', 'The Hunger Games', 'thehungergames.jpg');
 
 
 -- --------------------------------------------------------
