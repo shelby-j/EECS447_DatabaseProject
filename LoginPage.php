@@ -28,11 +28,11 @@
     <?php if(isset($_GET['error'])) { ?>
         <p class="error"> <?php echo $_GET['error']; ?></p>
     <?php } ?>
-      <label for="uname"><b>Username</b></label><br>
-      <input type="text" placeholder="User" name="uname" required><br>
+      <label for="username"><b>Username</b></label><br>
+      <input type="text" placeholder="User" name="username" required><br>
   
-      <label for="psw"><b>Password</b></label><br>
-      <input type="password" placeholder="Password" name="psw" required><br><br>
+      <label for="password"><b>Password</b></label><br>
+      <input type="password" placeholder="Password" name="password" required><br><br>
   
       <input type="submit" value="Login">
   </form>
