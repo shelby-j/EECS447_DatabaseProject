@@ -1,8 +1,8 @@
 <?php
-session_start()
-include "db_conn.php";
+session_start();
+include ("db.php");
 
-if(issets($_POST['uname']) && isset($_POST['psw'])) {
+if(isset($_POST['username']) && isset($_POST['password'])) {
 
     function validate($data) {
         $data = trim($data);
@@ -12,8 +12,8 @@ if(issets($_POST['uname']) && isset($_POST['psw'])) {
     }
 }
 
-$username = validate($_POST['uname']);
-$password = validate($_POST['psw']);
+$username = validate($_POST['username']);
+$password = validate($_POST['password']);
 
 if(empty($username)){
     header("Location: LoginPage.php?error=Enter Username")
@@ -25,7 +25,7 @@ else if(empty($password))
     exit();
 }
 
-$sql = "SELECT * FROM EMPLOYEE WHERE ENAME='$username' and PASS='$password'";
+$sql = "SELECT ENAME, PASS FROM EMPLOYEE WHERE ENAME='$username' and PASS='$password'";
 $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result)===1){
@@ -47,3 +47,4 @@ else {
     header("Location: LoginPage.php?");
     exit();
 }
+?>
