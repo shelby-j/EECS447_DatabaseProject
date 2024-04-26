@@ -1,50 +1,41 @@
+
+
+
 <?php
-session_start();
-include ("db.php");
 
-if(isset($_POST['username']) && isset($_POST['password'])) {
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-    function validate($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+$dbName = '447s24_s352j477';
+
+// Connect to MySQL server, select database
+$conn = mysqli_connect('mysql.eecs.ku.edu', '447s24_s352j477', 'aiCeiph7', '447s24_s352j477') or die('Could not connect: ' . mysqli_error());
+echo 'Connected successfully';
+
+
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+echo $username;
+echo $password;
+$sql = "SELECT ENAME FROM EMPLOYEE WHERE ENAME='$username' and PASS='$password';";
+echo $sql;
+$result1 = mysqli_query($conn, $sql);
+$result2 = mysqli_fetch_array($result1);
+
+
+mysqli_close($conn);
+
+
+if ($result2 != NULL){
+	header('Location: Homepage.php');
+	session_start();
+	$_SESSION["user"] = $username;
+}
+else{
+	header('Location: login.php');
 }
 
-$username = validate($_POST['username']);
-$password = validate($_POST['password']);
 
-if(empty($username)){
-    header("Location: LoginPage.php?error=Enter Username")
-    exit();
-}
-else if(empty($password))
-{
-    header("Location: LoginPage.php?error=Enter Password");
-    exit();
-}
-
-$sql = "SELECT ENAME, PASS FROM EMPLOYEE WHERE ENAME='$username' and PASS='$password'";
-$result = mysqli_query($conn, $sql);
-
-if(mysqli_num_rows($result)===1){
-    $row = mysqli_fetch_assoc($result);
-    if($row['ENAME']===$username && $row['PASS']===$password){
-        echo "Logged In";
-        $_SESSION['PASS'] = $row['PASS'];
-        $_SESSION['ENAME'] = $row['ENAME'];
-        header("Location: Homepage.php");
-        exit();
-
-    }
-    else{
-        header("Location: LoginPage.php?error=Incorrect Credentials");
-    exit();
-    }
-}
-else {
-    header("Location: LoginPage.php?");
-    exit();
-}
 ?>

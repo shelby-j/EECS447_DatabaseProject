@@ -3,6 +3,14 @@
 <body>
 
 <style>
+.buttons{
+    display: flex;
+    justify-content:flex-end;
+    align-items:center;
+}
+body {
+    text-align: center;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -23,12 +31,15 @@ li a {
   text-decoration: none;
 }
 
-li a:not(.active):hover {
+li a:hover:not(.active) {
   background-color: gray;
 }
 
 .active {
   background-color: #fb5592;
+}
+div{
+	text-align: center;
 }
 </style>
 
@@ -41,8 +52,11 @@ li a:not(.active):hover {
 
 
 <ul>
-  <li><a href="Homepage.html">Home</a></li>
+  <li><a href="Homepage.php">Home</a></li>
   <li class="active"><a href="employee.html">Employees</a></li>
+  <li><a href="account.php">Accounts</a></li> 
+  <li><a href="locations.php">Locations</a></li> 
+  <form action = "logout.php" method = "post"><div class="buttons"><button>Logout</button></div></form>
 </ul>
 
 <p>Enter Employee credentials</p>

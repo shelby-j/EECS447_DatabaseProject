@@ -1,7 +1,4 @@
-<?php
-session_start();
 
-if(isset($_SESSION['ENAME'])) { ?>
 
 
 <!DOCTYPE html>
@@ -44,6 +41,9 @@ li a:hover:not(.active) {
 .active {
   background-color: #fb5592;
 }
+div{
+	text-align: center;
+}
 </style>
 
 
@@ -57,14 +57,14 @@ li a:hover:not(.active) {
 <ul>
   <li class="active"><a href="Homepage.php">Home</a></li>
   <li><a href="employee.html">Employees</a></li>
-  <li><a href="accounts.html">Accounts</a></li>
-  <li><a href="locations.html">Locations</a></li>
-  <form><div class="buttons"><button>Profile</button></div></form>
+  <li><a href="account.php">Accounts</a></li> 
+  <li><a href="locations.php">Locations</a></li> 
+  <form action = "logout.php" method = "post"><div class="buttons"><button>Logout</button></div></form>
 </ul>
 <br/>
-<form action="db.php">
+<form action="Homepage.php" method="post">
 	<label for="branches"> Pick a branch to search: </label>
-	<select id="branches">
+	<select id="branches" name = "loc">
         <option value="All">Any</option>
 		<option value="Woodend">Woodend</option>
 		<option value="Turner Valley">Turner Valley</option>
@@ -78,10 +78,10 @@ li a:hover:not(.active) {
 	<label> Search by:</label><br>
 
     <label for="title"><b>Title: </b></label>
-    <input type="title" placeholder="Search Title" size=40><br>
+    <input name = "title" type="title" placeholder="Search Title" size=40><br>
 
     <label for="auth"><b>Author: </b></label>
-    <input type="auth" placeholder="Search Author" size=40><br>
+    <input type="auth" placeholder="Search Author" name = "auth" size=40><br>
 
     <label for="genre"><b>Genre: </b></label><br>
 
@@ -91,7 +91,7 @@ li a:hover:not(.active) {
 	<input type="radio" id="ChildLit" name="genre" value="Children's Lit"/>
     <label for="ChildLit">Children's Lit</label>
 	
-    <input type="radio" id="Poetry" name="searchType" value="Poetry"/>
+    <input type="radio" id="Poetry" name="genre" value="Poetry"/>
     <label for="Poetry">Poetry</label>
     
     <input type="radio" id="scifi" name="genre" value="Sci-Fi"/>
@@ -119,20 +119,102 @@ li a:hover:not(.active) {
 	
 </form>
 
-<div class="results">
+<div id="results">
+
+<?php
+
+
+
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+$dbName = '447s24_s352j477';
+
+// Connect to MySQL server, select database
+$conn = mysqli_connect('mysql.eecs.ku.edu', $dbName, 'aiCeiph7') or die('Could not connect: ' . mysqli_error());
+mysqli_select_db($conn, $dbName) or die('Could not select database');
+
+
+echo $_POST["genre"];
+
+$query = 'SELECT TITLE, AUTHOR FROM BOOKINFO';
+$result = mysqli_query($conn, $query, MYSQLI_STORE_RESULT) or die('Query failed: ' . mysqli_error());
+
+// Close connection
+
+
+$loc = $_POST["loc"];
+$title = $_POST["title"];
+$auth  = $_POST["auth"];
+$genre = $_POST["genre"];
+
+//if ($loc === "All"){
+//	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK";
+//}
+//else{
+//	$sqlloc = "SELECT BARCODE,ISBN FROM BOOK WHERE ATLOC = \"$loc\" ";
+//}
+
+
+if($loc ===  "All" and $genre ==="All"){
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN";
+}
+else if($loc !== "All" and $genre === "All"){
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOK.ATLOC = \"$loc\"";
+}
+else if($genre !== "All" and $loc ==="All")
+{
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOKGENRE.GENRE = \"$genre\"";
+}
+else{
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOK.ATLOC = \"$loc\" AND BOOKGENRE.GENRE = \"$genre\"";
+}
+
+
+if($title === "" and $auth ===""){
+	$sqls = "SELECT * FROM BOOKINFO,($sqlloc) AS LOC WHERE BOOKINFO.ISBN = LOC.ISBN;";
+}
+else if($title !== "" and $auth === ""){
+	$sqls = "SELECT * FROM BOOKINFO,($sqlloc) AS LOC WHERE TITLE LIKE \"%$title%\" AND BOOKINFO.ISBN = LOC.ISBN;";
+}
+else if($auth !== "" and $title ==="")
+{
+	$sqls = "SELECT * FROM BOOKINFO,($sqlloc) AS LOC WHERE AUTHOR LIKE \"%$auth%\" AND BOOKINFO.ISBN = LOC.ISBN;";
+}
+else{
+	$sqls = "SELECT * FROM BOOKINFO,($sqlloc) AS LOC WHERE AUTHOR LIKE \"%$auth%\" AND TITLE LIKE \"%$title%\" AND BOOKINFO.ISBN = LOC.ISBN;";
+}
+
+
+//if($genre === "All"){
+	//$sqlgenreall = "$sqls;";
+//}
+//else{
+//	$sqlgenreall = "SELECT AUTH.BARCODE, AUTH.ISBN, AUTH.TITLE, AUTH.AUTHOR FROM BOOKGENRE, ($sqls) AS AUTH WHERE BOOKGENRE.ISBN = AUTH.ISBN AND GENRE = \"$genre\";";
+	//$sqlgenreall = "SELECT * FROM ($sqlgenres) AS AUTH, BOOK WHERE BOOK.ISBN = AUTH.ISBN;";
+//}
+
+echo $sqls;
+$result = mysqli_query($conn, $sqls, MYSQLI_STORE_RESULT) or die('Query failed: ' . mysqli_error());
+
+echo "<table>\n";
+while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+   		echo "\t<tr>\n";
+   		foreach ($line as $col_value) {
+       		echo "\t\t<td>$col_value</td>\n";
+   		}
+   		echo "\t</tr>\n";
+}
+echo "</table>\n";
+
+mysqli_close($conn);
+?> 
+
 
 </div>
 
-<h1>Hello, <?php echo $_SESSION['ENAME'];?> </h1>
-<a href = "logout.php">Logout</a>
 </body>
 </html>
 
-<?php
-}
-else
-{
-  header("Location: LoginPage.php");
-  exit();
-}
-?>
+

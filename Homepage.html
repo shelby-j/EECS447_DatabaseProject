@@ -3,6 +3,14 @@
 <body>
 
 <style>
+.buttons{
+    display: flex;
+    justify-content:flex-end;
+    align-items:center;
+}
+body {
+    text-align: center;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -41,33 +49,67 @@ li a:hover:not(.active) {
  
 
 <ul>
-  <li class="active"><a href="Homepage.html">Home</a></li>
+  <li class="active"><a href="Homepage.php">Home</a></li>
   <li><a href="employee.html">Employees</a></li>
+  <!-- <li><a href="accounts.html">Accounts</a></li> 
+  <li><a href="locations.html">Locations</a></li> -->
+  <form><div class="buttons"><button>Profile</button></div></form>
 </ul>
 <br/>
 <form action="db.php">
 	<label for="branches"> Pick a branch to search: </label>
 	<select id="branches">
-		<option value="Lawrence">Lawrence</option>
-		<option value="Olathe">Olathe</option>
-		<option value="Kansas City">Kansas City</option>
-		<option value="Gardner">Gardener</option>
+        <option value="All">Any</option>
+		<option value="Woodend">Woodend</option>
+		<option value="Turner Valley">Turner Valley</option>
+		<option value="Park Lane">Park Lane</option>
+		<option value="Rosebud">Rosebud</option>
+        <option value="Lakelee">Lakelee</option>
+        <option value="Fallie">Fallie</option>
 	</select>
 	<br/><br/>
 	
-	<label> Search by:  
-		<input type="radio" id="title" name="searchType" value="title" checked />Title
-	</label>
-	<label>
-		<input type="radio" id="author" name="searchType" value="author"/>Author
-	</label>
-	<label>
-		<input type="radio" id="genre" name="searchType" value="genre"/>Genre
-	</label>
-	<br/>
-	<input type="text" placeholder="Search library database" size=40>
-    <input type="submit" value="Search">
+	<label> Search by:</label><br>
+
+    <label for="title"><b>Title: </b></label>
+    <input type="title" placeholder="Search Title" size=40><br>
+
+    <label for="auth"><b>Author: </b></label>
+    <input type="auth" placeholder="Search Author" size=40><br>
+
+    <label for="genre"><b>Genre: </b></label><br>
+
+    <input type="radio" id="all" name="genre" value="All"/>
+    <label for="all">Any</label>
+    
+	<input type="radio" id="ChildLit" name="genre" value="Children's Lit"/>
+    <label for="ChildLit">Children's Lit</label>
 	
+    <input type="radio" id="Poetry" name="genre" value="Poetry"/>
+    <label for="Poetry">Poetry</label>
+    
+    <input type="radio" id="scifi" name="genre" value="Sci-Fi"/>
+    <label for="scifi">Sci-Fi</label>
+    
+    <input type="radio" id="romance" name="genre" value="Romance"/>
+    <label for="romance">Romance</label>
+	
+    <input type="radio" id="classic" name="genre" value="Classic"/>
+    <label for="classic">Classics</label>
+	
+    <input type="radio" id="Horror" name="genre" value="Horror"/>
+    <label for="horror">Horror</label>
+	
+    <input type="radio" id="ya" name="genre" value="YA"/>
+    <label for="ya">YA</label>
+	
+    <input type="radio" id="dystopian" name="genre" value="Dystopian"/>
+    <label for="dystopian">Dystopian</label>
+	
+    <input type="radio" id="fantasy" name="genre" value="Fantasy"/>
+    <label for="fantasy">Fantasy</label><br>
+	
+    <input type="submit" value="Search">
 	
 </form>
 
