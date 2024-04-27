@@ -28,7 +28,7 @@
         </div>
       </nav>
 </section>
-<div>
+<div id="results">
     <?php
     
     $dbName = '447s24_s352j477';
@@ -36,11 +36,8 @@
     $conn = mysqli_connect('mysql.eecs.ku.edu', $dbName, 'aiCeiph7') or die('Could not connect: ' . mysqli_error());
     mysqli_select_db($conn, $dbName) or die('Could not select database');
     
-    
-    $sql = "SELECT ENAME, EMPLYID, LOCNAME FROM EMPLOYEE";";
-
+    $sql = "SELECT ENAME, EMPLOYID, LOCNAME FROM EMPLOYEE;";
     $result = mysqli_query($conn, $sql);
-  
     if(mysqli_fetch_array($result, MYSQLI_ASSOC) != NULL){
         echo "<br><br>";
         echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%;'>\n";
@@ -50,6 +47,7 @@
                 \t\t<th>Branch</th>\n
             \t</tr>";
     }
+
     while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
                foreach ($line as $col_value) {
@@ -60,7 +58,7 @@
     echo "</table>\n";
     
     mysqli_close($conn);
-    ?> 
+	?>
     
 </div>
 

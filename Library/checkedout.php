@@ -33,4 +33,6 @@ else{
 }
 mysqli_close($conn);
 
+header('Location: checkinout.html');
+
 ?>

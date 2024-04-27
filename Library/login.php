@@ -29,7 +29,7 @@ mysqli_close($conn);
 
 
 if ($result2 != NULL){
-	header('Location: Homepage.php');
+	header('Location: index.html');
 	session_start();
 	$_SESSION["user"] = $username;
 }

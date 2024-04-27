@@ -11,10 +11,7 @@ $conn = mysqli_connect('mysql.eecs.ku.edu', '447s24_s352j477', 'aiCeiph7', '447s
 
 
 
-$accid = $_POST['accid'];
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$loc = $_POST['loc'];
+$accid = $_POST['accountid'];
 
 $sql = "SELECT * FROM ACCOUNT WHERE ACCOUNTID =\"$accid\";";
 
@@ -24,11 +21,14 @@ $result2 = mysqli_fetch_array($result1);
 
 
 if ($result2 != NULL){
-    $sqldel = "DELETE * FROM ACCOUNT WHERE ACCOUNTID = \"$accid\";";
+    $sqldel = "DELETE FROM ACCOUNT WHERE ACCOUNTID = \"$accid\";";
     $r1 = mysqli_query($conn, $sqldel);
 }
 else{
-    echo("There already exists an emplyee with that ID")
+    echo("There already exists an emplyee with that ID");
     
 }
 mysqli_close($conn);
+
+header('Location: Delete_account.html');
+?>

@@ -51,7 +51,7 @@ div{
 <!---------------------- HTML -------------------------->
 
 
-<h1>Library Page</h1>
+<h1>Library Database Search</h1>
 
 <br/>
 <form action="Homepage.php" method="post">
