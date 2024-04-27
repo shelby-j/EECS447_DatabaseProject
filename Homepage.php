@@ -85,7 +85,7 @@ div{
 
     <label for="genre"><b>Genre: </b></label><br>
 
-    <input type="radio" id="all" name="genre" value="All"/>
+    <input type="radio" id="all" name="genre" value="All" checked />
     <label for="all">Any</label>
     
 	<input type="radio" id="ChildLit" name="genre" value="Children's Lit"/>
@@ -136,7 +136,7 @@ $conn = mysqli_connect('mysql.eecs.ku.edu', $dbName, 'aiCeiph7') or die('Could n
 mysqli_select_db($conn, $dbName) or die('Could not select database');
 
 
-echo $_POST["genre"];
+
 
 $query = 'SELECT TITLE, AUTHOR FROM BOOKINFO';
 $result = mysqli_query($conn, $query, MYSQLI_STORE_RESULT) or die('Query failed: ' . mysqli_error());
@@ -195,14 +195,26 @@ else{
 	//$sqlgenreall = "SELECT * FROM ($sqlgenres) AS AUTH, BOOK WHERE BOOK.ISBN = AUTH.ISBN;";
 //}
 
-echo $sqls;
+//echo $sqls;
 $result = mysqli_query($conn, $sqls, MYSQLI_STORE_RESULT) or die('Query failed: ' . mysqli_error());
 
-echo "<table>\n";
+//$tableStyle = "style='border:1px solid; border-collapse:collapse; padding:8px;'";
+if(mysqli_fetch_array($result, MYSQLI_ASSOC) != NULL){
+	echo "<br><br>";
+	echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%;'>\n";
+	echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'>
+			\t\t<th>ISBN</th>\n
+			\t\t<th>Publication Year</th>\n
+			\t\t<th>Author</th>\n
+			\t\t<th>Title</th>\n
+			\t\t<th>Cover</th>\n
+			\t\t<th>Barcode</th>\n
+		\t</tr>";
+}
 while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-   		echo "\t<tr>\n";
+   		echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
    		foreach ($line as $col_value) {
-       		echo "\t\t<td>$col_value</td>\n";
+       		echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
    		}
    		echo "\t</tr>\n";
 }
