@@ -12,6 +12,47 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
+
+      <style>
+        .buttons{
+            display: flex;
+            justify-content:flex-end;
+            align-items:center;
+        }
+        body {
+            text-align: center;
+        }
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: black;
+        }
+        
+        li {
+          float: left;
+        }
+        
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        
+        li a:hover:not(.active) {
+          background-color: gray;
+        }
+        
+        .active {
+          background-color: #6b6869;
+        }
+        div{
+          text-align: center;
+        }
+        </style>
 <!--------------------------------------------------------Navigation---------------------------------------------------------------------------------->
 <section id="nav-bar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -83,7 +124,24 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
- 
+ <!-- employee page-->
+  <ul>
+    <li><a href="Homepage.php">Home</a></li>
+    <li class="active"><a href="employee.html">Employees</a></li>
+    <li><a href="account.php">Accounts</a></li> 
+    <li><a href="locations.php">Locations</a></li> 
+    <form action = "logout.php" method = "post"><div class="buttons"><button>Logout</button></div></form>
+  </ul>
+  
+  <p>Enter Employee credentials</p>
+  
+  
+  <form action="db.php">
+    <input type="text" placeholder="Employee ID">
+    
+    <input type="submit" value="Enter">
+  </form>
+
     <!--------------------------------------------------------container----------------------------------------------------------->
     <section id="footer">
       <div class="container text-center">
