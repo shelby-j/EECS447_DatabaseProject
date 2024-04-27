@@ -52,7 +52,7 @@ div{
 
 
 <h1>Library Page</h1>
- 
+
 
 <ul>
   <li class="active"><a href="Homepage.php">Home</a></li>
@@ -158,17 +158,17 @@ $genre = $_POST["genre"];
 
 
 if($loc ===  "All" and $genre ==="All"){
-	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN";
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ATLOC, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN";
 }
 else if($loc !== "All" and $genre === "All"){
-	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOK.ATLOC = \"$loc\"";
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ATLOC, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOK.ATLOC = \"$loc\"";
 }
 else if($genre !== "All" and $loc ==="All")
 {
-	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOKGENRE.GENRE = \"$genre\"";
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ATLOC, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOKGENRE.GENRE = \"$genre\"";
 }
 else{
-	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOK.ATLOC = \"$loc\" AND BOOKGENRE.GENRE = \"$genre\"";
+	$sqlloc = "SELECT BOOK.BARCODE, BOOK.ATLOC, BOOK.ISBN FROM BOOK, BOOKGENRE WHERE BOOK.ISBN = BOOKGENRE.ISBN AND BOOK.ATLOC = \"$loc\" AND BOOKGENRE.GENRE = \"$genre\"";
 }
 
 
@@ -214,7 +214,13 @@ if(mysqli_fetch_array($result, MYSQLI_ASSOC) != NULL){
 while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
    		echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
    		foreach ($line as $col_value) {
-       		echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
+			if(str_contains($col_value, ".jpg")){
+				$path = "/coverImages/";
+				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'> <img src=' . $path . $col_value . '></td>\n";
+				
+			}else{
+				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
+			}
    		}
    		echo "\t</tr>\n";
 }
@@ -222,6 +228,8 @@ echo "</table>\n";
 
 mysqli_close($conn);
 ?> 
+
+
 
 
 </div>
