@@ -123,10 +123,11 @@
     height: 3px;
     margin: 20px auto 5px;
 }
-.services
+.services 
 {
     margin-top: 40px;
 }
+
 .icon
 {
     font-size: 40px;
@@ -389,4 +390,5 @@ h1::after
 .container i
 {
     letter-spacing: 3px;
+	display: inline;
 }
