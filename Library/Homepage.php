@@ -53,14 +53,6 @@ div{
 
 <h1>Library Page</h1>
 
-
-<ul>
-  <li class="active"><a href="Homepage.php">Home</a></li>
-  <li><a href="employee.php">Employees</a></li>
-  <li><a href="account.php">Accounts</a></li> 
-  <li><a href="locations.php">Locations</a></li> 
-  <form action = "logout.php" method = "post"><div class="buttons"><button>Logout</button></div></form>
-</ul>
 <br/>
 <form action="Homepage.php" method="post">
 	<label for="branches"> Pick a branch to search: </label>
@@ -209,14 +201,15 @@ if(mysqli_fetch_array($result, MYSQLI_ASSOC) != NULL){
 			\t\t<th>Title</th>\n
 			\t\t<th>Cover</th>\n
 			\t\t<th>Barcode</th>\n
+			\t\t<th>Location</th>\n
 		\t</tr>";
 }
 while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
    		echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
    		foreach ($line as $col_value) {
 			if(str_contains($col_value, ".jpg")){
-				$path = "/coverImages/";
-				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'> <img src=' . $path . $col_value . '></td>\n";
+				$path = "coverImages/";
+				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'> <img src='$path$col_value' style='max-width:100px;'></td>\n";
 				
 			}else{
 				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
@@ -225,6 +218,8 @@ while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
    		echo "\t</tr>\n";
 }
 echo "</table>\n";
+
+
 
 mysqli_close($conn);
 ?> 
