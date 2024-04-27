@@ -1,113 +1,69 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
+    <head>
+        <title>My Account</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="account.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+<!--------------------------------------------------------Navigation----------------------------------------------------------->
+<section id="nav-bar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active ">
+              <a class="nav-link" href="index.html" target="_parent" >HOME</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+</section>
+<div>
+    <?php
+    
+    $dbName = '447s24_s352j477';
+    
+    $conn = mysqli_connect('mysql.eecs.ku.edu', $dbName, 'aiCeiph7') or die('Could not connect: ' . mysqli_error());
+    mysqli_select_db($conn, $dbName) or die('Could not select database');
+    
+    
+    $sql = "SELECT ENAME, EMPLYID, LOCNAME FROM EMPLOYEE";";
 
-<style>
-.buttons{
-    display: flex;
-    justify-content:flex-end;
-    align-items:center;
-}
-body {
-    text-align: center;
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: black;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover:not(.active) {
-  background-color: gray;
-}
-
-.active {
-  background-color: #fb5592;
-}
-div{
-	text-align: center;
-}
-</style>
-
-
-
-<!---------------------- HTML -------------------------->
-
-
-<h1>Library Page</h1>
-
-
-<ul>
-  <li><a href="Homepage.php">Home</a></li>
-  <li class="active"><a href="employee.php">Employees</a></li>
-  <li><a href="account.php">Accounts</a></li> 
-  <li><a href="locations.php">Locations</a></li> 
-  <form action = "logout.php" method = "post"><div class="buttons"><button>Logout</button></div></form>
-</ul>
-
-<p>Enter Employee credentials</p>
-
-
-<form action="employee.php" method="post">
-  <input type="text" placeholder="Employee ID" name="EID">
-	
-  <input type="submit" value="Enter">
-</form>
-
-
-<div id="results">
-
-<?php
-
-
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$dbName = '447s24_s352j477';
-
-// Connect to MySQL server, select database
-$conn = mysqli_connect('mysql.eecs.ku.edu', $dbName, 'aiCeiph7') or die('Could not connect: ' . mysqli_error());
-mysqli_select_db($conn, $dbName) or die('Could not select database');
-
-
-$employ = $_POST["EID"];
-
-
-$query = "SELECT ENAME FROM EMPLOYEE WHERE EMPLOYID = \"$employ\";";
-$result = mysqli_query($conn, $query, MYSQLI_STORE_RESULT) or die('Query failed: ' . mysqli_error());
-
-
-// Close connection
-$result2 = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if($result2 != NULL){
-	echo $result2;
-}
-
-
-mysqli_close($conn);
-?> 
-
-
+    $result = mysqli_query($conn, $sql);
+  
+    if(mysqli_fetch_array($result, MYSQLI_ASSOC) != NULL){
+        echo "<br><br>";
+        echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%;'>\n";
+        echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'>
+                \t\t<th>Name</th>\n
+                \t\t<th>ID</th>\n
+                \t\t<th>Branch</th>\n
+            \t</tr>";
+    }
+    while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+               echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
+               foreach ($line as $col_value) {
+                   echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
+               }
+               echo "\t</tr>\n";
+    }
+    echo "</table>\n";
+    
+    mysqli_close($conn);
+    ?> 
+    
 </div>
 
-
-
-
-</body>
-</html>
+  
+  </body>
+  </html>
