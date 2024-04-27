@@ -1,3 +1,47 @@
+<style>
+  .col-12{
+    align-items: center;
+    text-align: center;
+  }
+  .form-control{
+    text-align: center;
+
+  }
+  .buttonlog {
+  background-color:  #bfbfbf;
+  border: 2px solid #404040;
+  border-radius: 25px;
+  color: #404040;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.buttonlog:hover {
+  background-color:  #bfbfbf;
+}
+
+.buttonlog:active {
+  box-shadow: #404040 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .buttonlog {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,16 +61,28 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-          <li class="nav-item active ">
-          <a class="nav-link" href="index.html" target="_parent" >HOME</a>
+        <ul class="navbar-nav ">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">HOME</a>
           </li>
-      </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="Homepage.php">VIEW CATALOG</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="checkinout.html">CHECK IN/OUT</a>
+          </li>
+              <a class="nav-link active" href="accounts.html" >PATRONS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="employee.php" >EMPLOYEE</a>
+            </li>
+        </ul>
       </div>
-  </nav>
+  <form action = "logout.php" method= "post"><div class="buttons"><button class = "buttonlog">Logout</button></div></form>
+    </nav>
 </section>
 <!------------------------------------------------------------------SLIDER-------------------------------------------------------------------------------------->
 <div id="headerSlider" class="carousel slide" data-ride="carousel">
@@ -92,19 +148,19 @@
             <p class="error"> <?php echo $_GET['error']; ?></p>
         <?php } ?>
         <div class="form-group">
-          <label for="accountid">Account ID</label>
+          <label for="accountid">Account ID:</label>
           <input type="text" class="form-control" id="accountid" name="accountid" pattern="\d{8}" title="Account ID must be exactly 8 digits" required placeholder="account id">
       </div>
             <div class="form-group">
-                <label for="fname">First Name</label>
+                <label for="fname">First Name:</label>
                 <input type="text" class="form-control" id="fname" name="fname" required placeholder="first name">
             </div>
             <div class="form-group">
-                <label for="lname">Last Name</label>
+                <label for="lname">Last Name:</label>
                 <input type="text" class="form-control" id="lname" name="lname" required placeholder="last name">
             </div>
             <div class="form-group">
-              <label for="homelocation">Home Location</label>
+              <label for="homelocation">Home Location:</label>
               <select class="form-control" id="homelocation" name="homelocation" required>
                   <option value="Woodend">Woodend</option>
                   <option value="Turner Valley">Turner Valley</option>
@@ -118,8 +174,6 @@
         </form>
     </div>
 </div>
-<a href="Delete_account.html"><button type="submit" class="btn btn-primary" value="del">Delete Account</button></a>
-
     <!--------------------------------------------------------container----------------------------------------------------------->
     <section id="footer">
       <div class="container text-center">
