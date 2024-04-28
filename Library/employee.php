@@ -137,22 +137,23 @@ p {
     
     $sql = "SELECT ENAME, EMPLOYID, LOCNAME FROM EMPLOYEE;";
     $result = mysqli_query($conn, $sql);
-    if(mysqli_fetch_array($result, MYSQLI_ASSOC) != NULL){
-        echo "<br><br>";
-        echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%;'>\n";
-        echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'>
-                \t\t<th>Name</th>\n
-                \t\t<th>ID</th>\n
-                \t\t<th>Branch</th>\n
-            \t</tr>";
-    }
-
+	$counter = 0;
     while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+			   if($counter < 1){
+				   echo "<br><br>";
+					echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%; color:white; background-color:rgba(0,0,0,0.5)'>\n";
+					echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'>
+							\t\t<th>Name</th>\n
+							\t\t<th>ID</th>\n
+							\t\t<th>Branch</th>\n
+						\t</tr>";
+			   }
                echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
                foreach ($line as $col_value) {
                    echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
                }
                echo "\t</tr>\n";
+			   $counter = $counter + 1;
     }
     echo "</table>\n";
     
