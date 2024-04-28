@@ -1,3 +1,41 @@
+<style>
+/* CSS */
+.buttonlog {
+  background-color:  #bfbfbf;
+  border: 2px solid #404040;
+  border-radius: 25px;
+  color: #404040;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.buttonlog:hover {
+  background-color:  #bfbfbf;
+}
+
+.buttonlog:active {
+  box-shadow: #404040 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .buttonlog {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,31 +63,19 @@
               <a class="nav-link" href="#top">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">ABOUT LIBRARY</a>
+              <a class="nav-link" href="Homepage.php">VIEW CATALOG</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#services">SERVICES</a>
+              <a class="nav-link" href="checkinout.html">CHECK IN/OUT</a>
             </li>
-                <a class="nav-link" href="#cateogory" >CATEGORIES</a>
+                <a class="nav-link" href="accounts.html" >PATRONS</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#contact" >CONTACT US</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  LOGIN
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="login.html" target="_blank">LOGIN/SIGNUP</a>
-                  <a class="dropdown-item" href="myaccount.html" target="_parent">MY ACCOUNT</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#team" >ABOUT US</a>
+                <a class="nav-link" href="employee.php" >EMPLOYEE</a>
               </li>
           </ul>
         </div>
-		<form action = "logout.php" method= "post><div class="buttons"><button>Logout</button></div></form>
+		<form action = "logout.php" method= "post"><div class="buttons"><button class = "buttonlog">Logout</button></div></form>
       </nav>
 </section>
 <!------------------------------------------------------------------SLIDER-------------------------------------------------------------------------------------->
@@ -146,7 +172,7 @@ Employees at each branch can use the system to manage books, update accounts, an
                  </div>
 				 </a>
 				 
-				 <a href="Add_account.html" class="container" id="services">
+				 <a href="accounts.html" class="container" id="services">
                  <div class="col-md-3 text-center">
                     <div class="icon"> 
                    <i class="fa fa-newspaper-o"></i></div>
@@ -308,7 +334,7 @@ Employees at each branch can use the system to manage books, update accounts, an
       </div>
     </section>
  --->
-    <!---------------------------------------------------About us------------------------------------------------------------------------------>
+    <!---------------------------------------------------About us---------------------------------------------------------------------------
     <section id="team">
         <div class="container">
             <h1>About Us</h1>
@@ -355,7 +381,7 @@ Employees at each branch can use the system to manage books, update accounts, an
             </div>
         </div>
     </section>
-    <!--------------------------------------------------------container----------------------------------------------------------->
+    ------------------------------------------------------container---------------------------------------------------------
     <section id="footer">
       <div class="container text-center">
         <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -366,10 +392,12 @@ Employees at each branch can use the system to manage books, update accounts, an
                          <p><i class="fa fa-copyright"></i> 2024</p>
       </div>
     </section>
-    <!-----------------------------------------------------------------javascript------------------------------------------------------------------>
+    --------------------------------------------------------------javascript------------------------------------------------------------------>
     <script src="javascript/scroll.js"></script>
     <script>
       var scroll = new SmoothScroll('a[href*="#"]');
     </script>
     </body>
 </html>
+
+
