@@ -6,45 +6,93 @@
 <body>
 
 <style>
-.buttons{
-    display: flex;
-    justify-content:flex-end;
-    align-items:center;
-}
-body {
-    text-align: center;
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: black;
-}
 
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
+/* CSS */
+.buttonlog {
+  background-color:  #bfbfbf;
+  border: 2px solid #404040;
+  border-radius: 25px;
+  color: #404040;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-li a:hover:not(.active) {
-  background-color: gray;
+.buttonlog:hover {
+  background-color:  #bfbfbf;
 }
 
-.active {
-  background-color: #fb5592;
+.buttonlog:active {
+  box-shadow: #404040 2px 2px 0 0;
+  transform: translate(2px, 2px);
 }
-div{
-	text-align: center;
+
+@media (min-width: 768px) {
+  .buttonlog {
+    min-width: 120px;
+    padding: 0 25px;
+  }
 }
+.searchform{
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 </style>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Welcome To Library </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+<!--------------------------------------------------------Navigation---------------------------------------------------------------------------------->
+<section id="nav-bar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Homepage.php">VIEW CATALOG</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="checkinout.html">CHECK IN/OUT</a>
+            </li>
+                <a class="nav-link" href="accounts.html" >PATRONS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="employee.php" >EMPLOYEE</a>
+              </li>
+          </ul>
+        </div>
+		<form action = "logout.php" method= "post"><div class="buttons"><button class = "buttonlog">Logout</button></div></form>
+      </nav>
+</section>
+
 
 
 
@@ -54,7 +102,7 @@ div{
 <h1>Library Database Search</h1>
 
 <br/>
-<form action="Homepage.php" method="post">
+<form action="Homepage.php" method="post" class="searchform">
 	<label for="branches"> Pick a branch to search: </label>
 	<select id="branches" name = "loc">
         <option value="All">Any</option>
@@ -191,31 +239,39 @@ else{
 $result = mysqli_query($conn, $sqls, MYSQLI_STORE_RESULT) or die('Query failed: ' . mysqli_error());
 
 //$tableStyle = "style='border:1px solid; border-collapse:collapse; padding:8px;'";
-if(mysqli_fetch_array($result, MYSQLI_ASSOC) != NULL){
-	echo "<br><br>";
-	echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%;'>\n";
-	echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'>
-			\t\t<th>ISBN</th>\n
-			\t\t<th>Publication Year</th>\n
-			\t\t<th>Author</th>\n
-			\t\t<th>Title</th>\n
-			\t\t<th>Cover</th>\n
-			\t\t<th>Barcode</th>\n
-			\t\t<th>Location</th>\n
-		\t</tr>";
-}
+
+$counter = 0;
 while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
    		echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
    		foreach ($line as $col_value) {
+			if($counter < 1){
+				   echo "<br><br>";
+					echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%;'>\n";
+					echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'>
+							\t\t<th>ISBN</th>\n
+							\t\t<th>Publication Year</th>\n
+							\t\t<th>Author</th>\n
+							\t\t<th>Title</th>\n
+							\t\t<th>Cover</th>\n
+							\t\t<th>Barcode</th>\n
+							\t\t<th>Location</th>\n
+						\t</tr>";
+			}
 			if(str_contains($col_value, ".jpg")){
 				$path = "coverImages/";
 				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'> <img src='$path$col_value' style='max-width:100px;'></td>\n";
 				
-			}else{
+			}
+			else if($col_value == NULL){
+				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'> Checked Out </td>\n";
+			}
+			else{
 				echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
 			}
+			$counter = $counter + 1;
    		}
    		echo "\t</tr>\n";
+		
 }
 echo "</table>\n";
 
