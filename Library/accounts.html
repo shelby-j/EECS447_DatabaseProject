@@ -95,7 +95,7 @@
     <form action = "logout.php" method= "post"><div class="buttons"><button class = "buttonlog">Logout</button></div></form>
       </nav>
   </section>
-  <div style="display: flex; width: 100%; height:100%;vertical-align:middle;justify-content:center; align-items:center;">
+  <div style="display: flex; width: 100%; height:50%;vertical-align:middle;justify-content:center; align-items:center;">
     <div style="diplay: flex; vertical-align:middle; text-align:center; padding-right:10%;">
         <form action = "Add_account.html" method= "post"><button class = "buttonadd" style="background-color:white;border-radius:12px;padding:20px;">Add an Account <br> ➕ </button></form>
     </div>
@@ -103,5 +103,44 @@
         <form action = "Delete_account.html" method= "post"><button class = "buttonrem" style="background-color:white;border-radius:12px;padding:20px;">Remove an Account<br> ➖ </button></form>
 	</div>
   </div>
+  
+<div id="results">
+    <?php
+    
+    $dbName = '447s24_s352j477';
+    
+    $conn = mysqli_connect('mysql.eecs.ku.edu', $dbName, 'aiCeiph7') or die('Could not connect: ' . mysqli_error());
+    mysqli_select_db($conn, $dbName) or die('Could not select database');
+    
+    $sql = "SELECT ACCOUNTID, FNAME, LNAME, HOMELOCATION FROM ACCOUNT;";
+    $result = mysqli_query($conn, $sql);
+	$counter = 0;
+    while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+			   if($counter < 1){
+				   echo "<br><br>";
+					echo "<table style='border:1px solid; border-collapse:collapse; padding:8px; width:100%; color:white; background-color:rgba(0,0,0,0.5)'>\n";
+					echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'>
+							\t\t<th>AccountID</th>\n
+							\t\t<th>First Name </th>\n
+							\t\t<th>Last Name</th>\n
+							\t\t<th>Location</th>\n
+						\t</tr>";
+			   }
+               echo "\t<tr style='border:1px solid; border-collapse:collapse; padding:8px;'> \n";
+               foreach ($line as $col_value) {
+                   echo "\t\t<td style='border:1px solid; border-collapse:collapse; padding:8px;'>$col_value</td>\n";
+               }
+               echo "\t</tr>\n";
+			   $counter = $counter + 1;
+    }
+    echo "</table>\n";
+    
+    mysqli_close($conn);
+	?>
+    
+</div>  
+  
+  
+  
   </body>
     </html>

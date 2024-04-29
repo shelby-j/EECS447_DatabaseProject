@@ -32,6 +32,6 @@ else{
 }
 mysqli_close($conn);
 
-header('Location: Add_account.html');
+header('Location: accounts.html');
 
 ?>

@@ -30,5 +30,5 @@ else{
 }
 mysqli_close($conn);
 
-header('Location: Delete_account.html');
+header('Location: accounts.html');
 ?>
