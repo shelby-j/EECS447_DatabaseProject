@@ -10,7 +10,7 @@ $dbName = '447s24_s352j477';
 $conn = mysqli_connect('mysql.eecs.ku.edu', '447s24_s352j477', 'aiCeiph7', '447s24_s352j477') or die('Could not connect: ' . mysqli_error());
 
 
-
+$loc = $_POST['location'];
 $barcode = $_POST['barcode'];
 $accid = $_POST['accid'];
 
@@ -23,10 +23,10 @@ $result2 = mysqli_fetch_array($result1);
 
 
 if ($result2 != NULL){
-    $uname = $_SESSION['user'];
+    /*$uname = $_SESSION['user'];
     $getloc = "SELECT LOCNAME FROM EMPLOYEE WHERE ENAME = \"$uname\";";
     $loc = mysqli_fetch_array(mysqli_query($conn, $getloc));
-	echo $loc;
+	echo $loc; */
     $sqldel = "DELETE FROM CHECKEDOUT WHERE BARCODE = \"$barcode\" and ACCOUNTID = \"$accid\";";
     $r1 = mysqli_query($conn, $sqldel);
     $sqladd  = "UPDATE BOOK SET ATLOC = \"$loc\" WHERE BARCODE = \"$barcode\";";
@@ -37,7 +37,7 @@ else{
 }
 mysqli_close($conn);
 
-//header('Location: checkinout.html');
+header('Location: checkinout.html');
 
 
 ?>
