@@ -34,7 +34,7 @@ if ($result2 != NULL){
 	$_SESSION["user"] = $username;
 }
 else{
-	header('Location: login.php');
+	header('Location: LoginPage.php');
 }
 
 
