@@ -131,22 +131,61 @@ p {
   <div class="split left">
     <div class="centered">
       <p>Check out a book from the system:</p><br>
-      <form action = "checkedout.php" method = "post">
+      <form id = "checkout" action = "" method = "post">
         <label for="barcode"><b>Book Barcode:</b></label><br>
         <input type="text" placeholder="Barcode" name="barcode" required><br>
     
         <label for="accid"><b>Accont Id:</b></label><br>
         <input type="text" placeholder="Account Id" name="accid" required><br><br>
     
-        <input type="submit" value="Check Out">
+        <input type="submit" name = "checkout" value="Check Out">
     </form>
+	<div>
+	<?php
+	 if( $_POST['checkout'] ) {
+		 ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+		
+		$dbName = '447s24_s352j477';
+		
+		// Connect to MySQL server, select database
+		$conn = mysqli_connect('mysql.eecs.ku.edu', '447s24_s352j477', 'aiCeiph7', '447s24_s352j477') or die('Could not connect: ' . mysqli_error());
+		
+		
+		$barcode = $_POST['barcode'];
+		$accid = $_POST['accid'];
+		
+		
+		$sql = "SELECT * FROM CHECKEDOUT WHERE BARCODE=\"$barcode\" and ACCOUNTID =\"$accid\";";
+		
+		$result1 = mysqli_query($conn, $sql);
+		$result2 = mysqli_fetch_array($result1);
+		
+		
+		
+		if ($result2 != NULL){
+		    echo("Book is already checked out");
+		}
+		else{
+		    $sqldel = "INSERT INTO CHECKEDOUT (BARCODE, ACCOUNTID) VALUES(\"$barcode\", \"$accid\");";
+		    $r1 = mysqli_query($conn, $sqldel);
+		    $sqladd  = "UPDATE BOOK SET ATLOC = NULL WHERE BARCODE = \"$barcode\";";
+		    $r2= mysqli_query($conn, $sqladd);
+			header('Location: checkinout.php');
+		    
+		}
+		mysqli_close($conn);
+		}
+		 ?>
+	</div>
     </div>
   </div>
   
   <div class="split right">
     <div class="centered">
       <p>Check in a book to the system:</p><br>
-      <form action = "checkin.php" method = "post">
+      <form id = "checkin" action = "" method = "post">
         <label for="barcode"><b>Book Barcode:</b></label><br>
         <input type="text" placeholder="Barcode" name="barcode" required><br>
     
@@ -162,8 +201,51 @@ p {
 			<option value="Woodend">Woodend</option>
 		</select>
 		<br><br>
-        <input type="submit" value="Check In">
+        <input type="submit" name = "checkin" value="Check In">
     </form>
+	<div>
+	<?php
+	 if( $_POST['checkin'] ) {
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+		
+		$dbName = '447s24_s352j477';
+		
+		// Connect to MySQL server, select database
+		$conn = mysqli_connect('mysql.eecs.ku.edu', '447s24_s352j477', 'aiCeiph7', '447s24_s352j477') or die('Could not connect: ' . mysqli_error());
+		
+		
+		$loc = $_POST['location'];
+		$barcode = $_POST['barcode'];
+		$accid = $_POST['accid'];
+		
+		
+		$sql = "SELECT * FROM CHECKEDOUT WHERE BARCODE=\"$barcode\" and ACCOUNTID =\"$accid\";";
+		
+		$result1 = mysqli_query($conn, $sql);
+		$result2 = mysqli_fetch_array($result1);
+		
+		
+		
+		if ($result2 != NULL){
+		    /*$uname = $_SESSION['user'];
+		    $getloc = "SELECT LOCNAME FROM EMPLOYEE WHERE ENAME = \"$uname\";";
+		    $loc = mysqli_fetch_array(mysqli_query($conn, $getloc));
+			echo $loc; */
+		    $sqldel = "DELETE FROM CHECKEDOUT WHERE BARCODE = \"$barcode\" and ACCOUNTID = \"$accid\";";
+		    $r1 = mysqli_query($conn, $sqldel);
+		    $sqladd  = "UPDATE BOOK SET ATLOC = \"$loc\" WHERE BARCODE = \"$barcode\";";
+		    $r1 = mysqli_query($conn, $sqladd);
+		   header('Location: checkinout.php');
+		}
+		else{
+			echo("Book is already checked in");
+		}
+		mysqli_close($conn);
+		}
+		 ?>
+	</div>
     </div>
 </body>
   </html>
