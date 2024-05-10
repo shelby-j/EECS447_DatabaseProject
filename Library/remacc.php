@@ -69,7 +69,7 @@ input {
             <a class="nav-link" href="Homepage.php">VIEW CATALOG</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="checkinout.html">CHECK IN/OUT</a>
+            <a class="nav-link" href="checkinout.php">CHECK IN/OUT</a>
           </li>
               <a class="nav-link active" href="accounts.html" >PATRONS</a>
             </li>
