@@ -72,7 +72,7 @@ if ($result2 != NULL){
 	$_SESSION["user"] = $username;
 }
 else{
-	echo "Invalid Username or Password"
+	echo ("Invalid Username or Password");
 }
 ?>
   </h2>
